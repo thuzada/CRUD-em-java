@@ -116,10 +116,10 @@ public class SistemaCadastroGUI {
     private static boolean emailJaCadastrado(String email) {
         for (Usuario u : usuarios) {
             if (u.email.equals(email)) {
-                return true; // Email já existe
+                return true;
             }
         }
-        return false; // Email não existe
+        return false;
     }
     private static void cadastrarUsuario() {
         JTextField nomeField = new JTextField();
