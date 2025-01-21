@@ -27,7 +27,7 @@ Abra o projeto na sua IDE ou editor de texto preferido.
 
 2.Compile e execute o código na sua IDE ou pelo terminal:
 
-    ```bash
+
     Copiar código
     javac SistemaCadastroGUI.java
                 OU
