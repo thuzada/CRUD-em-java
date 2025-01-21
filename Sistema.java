@@ -73,7 +73,7 @@ public class Sistema {
                         System.out.println("Idade inválida. Digite novamente:");
                     }
 
-                    scanner.nextLine(); // Limpar buffer
+                    scanner.nextLine(); 
                     System.out.print("Senha: ");
                     String senha = scanner.nextLine();
                      
@@ -121,7 +121,7 @@ public class Sistema {
                                             System.out.println("4. Sair");
                                             System.out.print("Escolha uma opção: ");
                                             opcaoEditar = scanner.nextInt();
-                                            scanner.nextLine(); // Limpar o buffer
+                                            scanner.nextLine(); 
 
                                             switch (opcaoEditar) {
                                                 case 1:
@@ -132,7 +132,7 @@ public class Sistema {
                                                 case 2:
                                                     System.out.print("Nova idade: ");
                                                     u.idade = scanner.nextInt();
-                                                    scanner.nextLine(); // Limpar o buffer
+                                                    scanner.nextLine(); 
                                                     System.out.println("Idade atualizada com sucesso!");
                                                     break;
                                                 case 3:
@@ -156,18 +156,99 @@ public class Sistema {
                                             }
     break;
 
-                    case 5:
-                    System.out.print("E-mail: ");
-                    String emailLogin = scanner.nextLine();
-                    System.out.print("Senha: ");
-                    String senhaLogin = scanner.nextLine();
+    case 5:
+    System.out.print("E-mail: ");
+    String emailLogin = scanner.nextLine();
+    System.out.print("Senha: (DIGITE 0 SE VOCÊ NÃO LEMBRA DA SENHA): ");
+    String senhaLogin = scanner.nextLine();
 
-                    if (autenticarUsuario(usuarios, emailLogin, senhaLogin)) {
-                        System.out.println("Login bem-sucedido!");
+    if (senhaLogin.equals("0")) {
+        System.out.print("Digite o e-mail do usuário para redefinir a senha: ");
+        String emailRedefinir = scanner.nextLine();
+        boolean encontradoRedefinir = false;
+
+        for (Usuario u : usuarios) {
+            if (u.email.equals(emailRedefinir)) {
+                encontradoRedefinir = true;
+                System.out.print("Nova senha: ");
+                u.senha = scanner.nextLine();
+                System.out.println("Senha redefinida com sucesso!");
+                break;
+            }
+        }
+
+        if (!encontradoRedefinir) {
+            System.out.println("E-mail não encontrado.");
+        }
+        break; 
+    }
+
+    Usuario usuarioLogado = null;
+    for (Usuario u : usuarios) {
+        if (u.email.equals(emailLogin) && u.senha.equals(senhaLogin)) {
+            usuarioLogado = u;
+            break;
+        }
+    }
+
+    if (usuarioLogado != null) {
+        System.out.println("Login bem-sucedido!");
+        boolean continuar = true;
+
+        while (continuar) {
+            System.out.println("\n--- Menu do Usuário ---");
+            System.out.println("1. Ver Perfil");
+            System.out.println("2. Atualizar Informações");
+            System.out.println("3. Excluir Conta");
+            System.out.println("4. Logout");
+            System.out.print("Escolha uma opção: ");
+            int escolhaUsuario = scanner.nextInt();
+            scanner.nextLine(); 
+
+            switch (escolhaUsuario) {
+                case 1:
+                    System.out.println("\n--- Perfil do Usuário ---");
+                    System.out.println("Nome: " + usuarioLogado.nome);
+                    System.out.println("E-mail: " + usuarioLogado.email);
+                    break;
+
+                case 2:
+                    System.out.print("\nDigite o novo nome: ");
+                    usuarioLogado.nome = scanner.nextLine();
+                    System.out.print("Digite o novo e-mail: ");
+                    usuarioLogado.email = scanner.nextLine();
+                    System.out.print("Digite a nova senha: ");
+                    usuarioLogado.senha = scanner.nextLine();
+                    System.out.println("Informações atualizadas com sucesso!");
+                    break;
+
+                case 3:
+                    System.out.println("\nTem certeza que deseja excluir sua conta? (s/n)");
+                    String confirmacao = scanner.nextLine();
+                    if (confirmacao.equalsIgnoreCase("s")) {
+                        usuarios.remove(usuarioLogado);
+                        System.out.println("Conta excluída com sucesso!");
+                        usuarioLogado = null;
+                        continuar = false;
                     } else {
-                        System.out.println("E-mail ou senha incorretos.");
+                        System.out.println("Ação cancelada.");
                     }
                     break;
+
+                case 4:
+                    System.out.println("Logout realizado com sucesso!");
+                    usuarioLogado = null;
+                    continuar = false;
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+    } else {
+        System.out.println("E-mail ou senha incorretos.");
+    }
+    break;
 
                 case 6:
                     System.out.println("Encerrando o programa...");
