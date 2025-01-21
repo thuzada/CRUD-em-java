@@ -25,13 +25,13 @@ Antes de rodar o projeto, é necessário ter o seguinte instalado em sua máquin
    git clone https://github.com/thuzada/Sistema-de-CRUD-em-JAVA.git
 Abra o projeto na sua IDE ou editor de texto preferido.
 
-Compile e execute o código na sua IDE ou pelo terminal:
+2.Compile e execute o código na sua IDE ou pelo terminal:
 
-bash
-Copiar código
-javac SistemaCadastroGUI.java
-            OU
-java Sistema
+    ```bash
+    Copiar código
+    javac SistemaCadastroGUI.java
+                OU
+    java Sistema
 
 
 O programa irá solicitar que você insira o nome, idade, e-mail e senha de um novo usuário. O e-mail será validado, e o cadastro será registrado.
