@@ -1,8 +1,46 @@
 import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Sistema {
+    public static void salvarDados(ArrayList<Usuario> usuarios, String nomeArquivo) {
+    try (FileWriter writer = new FileWriter(nomeArquivo)) {
+        for (Usuario u : usuarios) {
+            writer.write(u.nome + ";" + u.email + ";" + u.idade + ";" + u.senha + "\n");
+        }
+        System.out.println("Dados salvos com sucesso no arquivo: " + nomeArquivo);
+    } catch (IOException e) {
+        System.out.println("Erro ao salvar os dados: " + e.getMessage());
+    }
+}
+
+public static ArrayList<Usuario> carregarDados(String nomeArquivo) {
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+    try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
+        String linha;
+        while ((linha = reader.readLine()) != null) {
+            String[] dados = linha.split(";");
+            if (dados.length == 4) {
+                String nome = dados[0];
+                String email = dados[1];
+                int idade = Integer.parseInt(dados[2]);
+                String senha = dados[3];
+                usuarios.add(new Usuario(nome, email, idade, senha));
+            }
+        }
+        System.out.println("Dados carregados com sucesso do arquivo: " + nomeArquivo);
+    } catch (FileNotFoundException e) {
+        System.out.println("Arquivo não encontrado. Nenhum dado carregado.");
+    } catch (IOException e) {
+        System.out.println("Erro ao carregar os dados: " + e.getMessage());
+    }
+    return usuarios;
+}
     public static boolean autenticarUsuario(ArrayList<Usuario> usuarios, String email, String senha) {
         for (Usuario u : usuarios) {
             if (u.email.equals(email) && u.senha.equals(senha)) {
@@ -33,7 +71,8 @@ public class Sistema {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = carregarDados("usuarios.txt");
+
         int opcao;
 
         do {
@@ -80,6 +119,8 @@ public class Sistema {
 
                     usuarios.add(new Usuario(nome, email, idade, senha));
                     System.out.println("Usuário cadastrado com sucesso!");
+                    salvarDados(usuarios, "usuarios.txt");
+
                     break;
 
                 case 2:
@@ -102,6 +143,8 @@ public class Sistema {
                     } else {
                         System.out.println("E-mail não encontrado.");
                     }
+                    salvarDados(usuarios, "usuarios.txt");
+
                     break;
                     case 4:
                     System.out.print("Digite o e-mail do usuário para atualizar: ");
@@ -154,6 +197,8 @@ public class Sistema {
                                             if (!encontrado) {
                                                 System.out.println("E-mail não encontrado.");
                                             }
+                                            salvarDados(usuarios, "usuarios.txt");
+
     break;
 
     case 5:
@@ -248,6 +293,8 @@ public class Sistema {
     } else {
         System.out.println("E-mail ou senha incorretos.");
     }
+    salvarDados(usuarios, "usuarios.txt");
+
     break;
 
                 case 6:
