@@ -37,6 +37,7 @@ O programa irá solicitar que você insira o nome, idade, e-mail e senha de um n
 Os dados dos usuários cadastrados serão salvos no arquivo usuarios.txt no mesmo diretório do programa.
 
 Estrutura do Projeto
-SistemaCadastroGUI.java: Arquivo principal com a lógica de cadastro e validações.
+SistemaCadastroGUI.java: Arquivo principal com a lógica de cadastro e validações e GUI integrada.
+Sistema.java: Arquivo sem GUI integrada.
 usuarios.txt: Arquivo onde os dados dos usuários são armazenados.
 Contribuições
