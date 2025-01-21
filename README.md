@@ -37,15 +37,6 @@ O programa irá solicitar que você insira o nome, idade, e-mail e senha de um n
 Os dados dos usuários cadastrados serão salvos no arquivo usuarios.txt no mesmo diretório do programa.
 
 Estrutura do Projeto
-SistemaCadastro.java: Arquivo principal com a lógica de cadastro e validações.
+SistemaCadastroGUI.java: Arquivo principal com a lógica de cadastro e validações.
 usuarios.txt: Arquivo onde os dados dos usuários são armazenados.
 Contribuições
-Sinta-se à vontade para contribuir com melhorias neste projeto! Para contribuir:
-
-Fork o repositório.
-Crie uma branch com sua nova funcionalidade (git checkout -b feature/nova-funcionalidade).
-Commit suas mudanças (git commit -am 'Adicionando nova funcionalidade').
-Faça o push para a sua branch (git push origin feature/nova-funcionalidade).
-Crie um Pull Request.
-Licença
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
