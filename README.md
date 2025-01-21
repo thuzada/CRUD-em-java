@@ -30,8 +30,6 @@ Abra o projeto na sua IDE ou editor de texto preferido.
 
     Copiar código
     javac SistemaCadastroGUI.java
-                OU
-    java Sistema
 
 
 O programa irá solicitar que você insira o nome, idade, e-mail e senha de um novo usuário. O e-mail será validado, e o cadastro será registrado.
